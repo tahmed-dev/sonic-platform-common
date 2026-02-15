@@ -1032,9 +1032,9 @@ class TestModuleBase:
     @pytest.mark.parametrize(
         "timeouts,hget_vals,now,expected",
         [
-            ({"startup": 0, "shutdown": 0, "reboot": 0}, ["True", str(int(time.time()))], time.time() + 1, True),
+            ({"startup": 0, "shutdown": 0, "reboot": 0}, ["True", "1700000000"], 1700000001, True),
             ({"startup": 999999999, "shutdown": 999999999, "reboot": 999999999}, ["True", "1"], 1_000_000, False),
-            ({"startup": -1, "shutdown": -1, "reboot": -1}, ["True", str(int(time.time()))], time.time() + 1, True),
+            ({"startup": -1, "shutdown": -1, "reboot": -1}, ["True", "1700000000"], 1700000001, True),
         ],
     )
     def test_transition_timeout_edge_cases(self, timeouts, hget_vals, now, expected):
